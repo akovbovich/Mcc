@@ -5,8 +5,6 @@ use warnings;
 
 use lib 'lib';
 
-use Event;
-use AnyEvent;
 use Coro;
 use Mcc;
 
@@ -14,19 +12,22 @@ use Time::HiRes 'gettimeofday';
 
 our $Has_Cache_Memcached = eval { require Cache::Memcached; } // 0;
 
+my $host = '127.0.0.1';
+my $port = '11211';
+
 my $_memd;
 if ($Has_Cache_Memcached) {
     $_memd = Cache::Memcached->new(
-        servers => ['127.0.0.1:11211'],
+        servers => ["$host:$port"],
         debug => 0,
     );
     print "Cache::Memcached found\n\n";
 }
 
-my $memd = Mcc->new(server => '127.0.0.1:11211');
+my $memd = Mcc->new(server => "$host:$port");
 
-my $k = $ARGV[0] || 64; # perl ./mcc_bench.pl 64
-my $val = 'x' x $k; # 64 bytes data
+my $k = $ARGV[0] || 64;         # perl ./mcc_bench.pl 64
+my $val = 'x' x $k;             # 64 bytes of data
 my $niter = $ARGV[1] || 10_000; # perl ./mcc_bench.pl 64 10000
 my @tasks;
 

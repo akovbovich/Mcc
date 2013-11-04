@@ -15,6 +15,7 @@ use 5.10.1;
 use constant F_STORABLE => 1;
 
 our $VERSION = '0.01';
+no if $] >= 5.018, warnings => "experimental::smartmatch";
 
 has _hostport     => (is => 'ro', init_arg => 'server', required => 1);
 has _get_sock     => (is => 'ro', lazy => 1, builder => '_mk_sock');
