@@ -14,7 +14,8 @@ Coro позволяет писать sequential код, тогда как зап
 
 ##### 64 bytes
 
-    $ perl ./mcc_bench.pl 64`
+    $ perl ./mcc_bench.pl 64
+
     Cache::Memcached SET test started (10000 iterations/64 bytes data)
     Finished 10000 iters in 0.63 seconds. Average reqs/s: 15872
     Cache::Memcached GET test started (10000 iterations/64 bytes data)
